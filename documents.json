@@ -1,11 +1,77 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
+    "name": "member-statement",
+    "title": "Member statement: draft",
+    "for_each": "select id,name from members order by name",
+    "file": "id",
+    "sections": [
+      {
+        "title": "Membership",
+        "sql": "select name,email,status,joined_on,renewal_due from members where id=$1"
+      },
+      {
+        "title": "Invoices and balance",
+        "sql": "select name,amount,currency,balance,due_on,void from invoice_balances where member_id=$1 order by due_on",
+        "note": "Recorded receipts only. Review against your bank and accounts before issuing."
+      }
+    ]
+  },
+  {
+    "name": "event-roll",
+    "title": "Event attendance roll: draft",
+    "for_each": "select id,name from events order by starts_on",
+    "file": "id",
+    "sections": [
+      {
+        "title": "Event",
+        "sql": "select name,starts_on,venue,capacity,status from events where id=$1"
+      },
+      {
+        "title": "Attendees",
+        "sql": "select m.name,r.status from registrations r join members m on m.id=r.member_id where event_id=$1 order by m.name"
+      }
+    ]
+  },
+  {
+    "name": "renewal-letter",
+    "title": "Membership renewal: draft",
+    "for_each": "select id,name from members where status in ('active','lapsed') and renewal_due<=current_date+60",
+    "file": "id",
+    "sections": [
+      {
+        "title": "Renewal details",
+        "sql": "select m.name,m.renewal_due,l.name as membership,l.annual_fee,l.currency from members m left join levels l on l.id=m.level_id where m.id=$1",
+        "note": "Please review your renewal details with our team. This draft is not a receipt or payment instruction."
+      }
+    ]
+  },
+  {
+    "name": "governance-notice",
+    "title": "Committee notice: draft",
+    "for_each": "select id,name from obligations where completed_on is null",
+    "file": "id",
+    "sections": [
+      {
+        "title": "Notice details",
+        "sql": "select name,jurisdiction,due_on,notice_days,source_url from obligations where id=$1",
+        "note": "Review the constitution, recipient list and notice period before sending. This file does not send a notice."
+      }
+    ]
+  },
+  {
+    "name": "cpd-statement",
+    "title": "CPD evidence statement (draft)",
+    "for_each": "select id,name from members",
     "file": "name",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Approved calendar-year learning",
+        "sql": "select name,category,completed_on,hours,evidence_ref,reviewer from cpd where member_id=$1 and review_status='approved' and completed_on>=date_trunc('year',current_date)::date and completed_on<=current_date order by completed_on"
+      },
+      {
+        "title": "Pending evidence and review",
+        "sql": "select name,category,completed_on,hours,evidence_ref from cpd where member_id=$1 and review_status='pending'"
+      }
     ]
   }
 ]

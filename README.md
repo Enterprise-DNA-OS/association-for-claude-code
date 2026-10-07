@@ -1,115 +1,129 @@
-<h1 align="center">Association for Claude Code</h1>
+# Association for Claude Code
 
-<p align="center">
-  <strong>The open-source association and member portal system that is just a database and Claude Code.</strong>
-</p>
+Your members, renewals, events, receipts and committee records in a database you own. Free MIT-licensed software for association administrators. Works with Claude Code, Codex, OpenCode or Cursor.
 
-<p align="center">
-  Created by <a href="https://www.enterprisedna.co"><strong>Enterprise DNA</strong></a>. Free and open source. Works with Claude Code, Codex, OpenCode or Cursor.
-</p>
+| Do it yourself | We customise it | We run it for you |
+|---|---|---|
+| Free. Clone, run the demo, import members. | Your fields, rules, Member Jungle data, web front end or different stack. | Installed, connected and operated through Omni by Enterprise DNA. Setup fee, then retainer. |
+| [Quick start](#quick-start) | [Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_campaign=memberjungle&utm_source=github&utm_medium=customise) | [Book a call](https://enterprisedna.co/omni/book/?offer=replace-software&utm_campaign=memberjungle&utm_source=github&utm_medium=managed) |
 
-<!-- three-doors -->
-<table align="center">
-  <tr>
-    <td align="center"><strong>Do it yourself</strong><br/>Clone it, run it, own it. Free, MIT.<br/><a href="#quick-start">Quick start</a></td>
-    <td align="center"><strong>We customise it</strong><br/>Your fields, your rules, your MemberJungle data brought across.<br/><a href="https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=memberjungle">Book a call</a></td>
-    <td align="center"><strong>We run it for you</strong><br/>Installed, connected and operated inside Omni. Setup fee, then a retainer.<br/><a href="https://enterprisedna.co/omni/instead-of/memberjungle?utm_source=github&utm_medium=readme&utm_campaign=memberjungle">How it works</a></td>
-  </tr>
-</table>
+## What the membership team does each week
 
-<p align="center">
-  <a href="#what-is-this">What is this</a> &bull;
-  <a href="#why-no-front-end">Why no front end</a> &bull;
-  <a href="#quick-start">Quick start</a> &bull;
-  <a href="#the-commands">Commands</a> &bull;
-  <a href="#instead-of-memberjungle">Instead of MemberJungle</a> &bull;
-  <a href="#want-it-installed-and-run-for-you">Installed for you</a> &bull;
-  <a href="#license">License</a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Node-20+-339933?style=flat-square" alt="Node 20+" />
-  <img src="https://img.shields.io/badge/PostgreSQL-any-336791?style=flat-square" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/PGlite-embedded-3ecf8e?style=flat-square" alt="PGlite" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="MIT License" />
-</p>
-
----
-
-## What is this
-
-Association for Claude Code does the job you pay MemberJungle for, as a Postgres database and a set of agent commands. There is no web front end. You open the folder in [Claude Code](https://claude.com/claude-code) (or Codex, OpenCode, Cursor: see `AGENTS.md`) and ask for what you want in plain language. It runs the right query, and it can answer questions the MemberJungle dashboard cannot.
-
-<!-- TODO(author): the annual bill. One sentence: what a 10 to 50 person business typically pays MemberJungle per year, all in, with a source. -->
-
-Want the same thing with a web front end, or built on a different stack? That is a customisation, and it is exactly what Enterprise DNA does: [book a call](https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=memberjungle).
-
-<!-- TODO(author): two or three sentences on what this specific product covers and who it is for. -->
-
-## Why no front end
-
-- The front end was only ever there because the database was hard to talk to. That is no longer true.
-- Your data sits in plain Postgres tables you own. Any tool can read them. No export, no lock-in.
-- No seats, no tiers, no add-ons. Read [docs/why-no-front-end.md](docs/why-no-front-end.md) for the honest trade-offs too.
+Chase renewals, reconcile recorded dues, check event numbers, review learning records and prepare committee paperwork. The fictional Harbour Professional Association includes an overdue renewal with a partial receipt, a quiet member missing joining consent, a lapsed subscription, an upcoming event and an officer missing eligibility evidence. Seed dates move with the first demo run; reseeding does not reset records.
 
 ## Quick start
 
-Sixty seconds, no database install (an embedded Postgres runs inside Node):
+Node 20 or later on Windows or Linux:
 
 ```bash
 git clone https://github.com/Enterprise-DNA-OS/association-for-claude-code.git
 cd association-for-claude-code
 npm install
 npm run demo
+npm test
+npm run view
+npm run docs
 ```
 
-Then open the folder in Claude Code and type a slash command. <!-- TODO(author): name the first command to try. -->
+PGlite stores local records under .data/db without a database server. Set DATABASE_URL for hosted Postgres; TLS verification is enabled. Real imports belong in a fresh DATA_DIR after npm run migrate, without demo seed data. The installation serves one association. Shared operation needs restricted database access, host security and backups. Local PGlite is single-process.
 
-### Use it with your own Postgres or Supabase
+Open the folder in your coding agent and ask: "Which renewals need attention?" AGENTS.md routes every runtime to CLAUDE.md and the same .claude/commands recipes.
 
-Copy `.env.example` to `.env`, set `DATABASE_URL`, then `npm run migrate`. Same commands, shared data, no per-seat fee.
+## Commands
 
-## The commands
+43 executable commands, including help, and 44 recurring slash recipes including customise and new-view:
 
-<!-- TODO(author): a table of the slash commands in .claude/commands and what each one does. -->
+- /members
+- /levels
+- /renewals-due
+- /attention
+- /arrears
+- /events
+- /registrations
+- /invoices
+- /payments
+- /donations
+- /cpd-review
+- /cpd-categories
+- /cpd-evidence
+- /approve-cpd
+- /cpd-gaps
+- /cpd
+- /engagement
+- /level-summary
+- /cash-summary
+- /donor-summary
+- /officers
+- /obligations
+- /activity
+- /audit
+- /consent-review
+- /renewal-risk
+- /member
+- /event
+- /compliance
+- /weekly-review
+- /add
+- /set
+- /renew
+- /register
+- /check-in
+- /cancel-registration
+- /payment
+- /log
+- /draft-renewal
+- /draft-invitation
+- /import
+- /export
+- /customise
+- /new-view
 
-| Command | What it does |
-|---|---|
-| `/...` | ... |
+See [the CLI guide](docs/cli.md) for arguments, fields and calculations. Human tables and --json are supported. Partial IDs and case-insensitive names work; ambiguous matches list candidates and exit 1. Payments only record receipts already received, and nothing sends or charges a card.
 
-## Instead of memberjungle
+## Ten questions beyond a fixed dashboard
 
-<!-- TODO(author): how to bring data across from MemberJungle; link docs/replace-memberjungle.md -->
+These are working queries you can change. Member Jungle also supports reporting and exports; this list makes no unsupported claim that it cannot answer them.
 
-## Architecture
+- Which renewals combine unpaid dues, no attendance and a learning gap? `renewal-risk`
+- Which members have gone quiet for more than two months? `attention`
+- Whose invoice is overdue after partial receipts? `arrears`
+- Which upcoming events have a waiting list? `events`
+- Which active members have no recorded attendance in the past year? `engagement`
+- Who is below our calendar-year approved learning target? `cpd-gaps`
+- Which active members lack joining consent evidence? `consent-review`
+- Which committee records have missing certificates or late notices? `compliance`
+- What have we actually received, separated by currency? `cash-summary`
+- Which learning activities still need supporting evidence? `cpd-evidence`
 
-```
-association-for-claude-code/
-  CLAUDE.md                 how the operator wants this run (routing table + house rules)
-  AGENTS.md                 the same, for Codex / OpenCode / Cursor / Gemini CLI
-  .claude/commands/         the slash commands
-  scripts/                  the CLI the commands drive
-  scripts/lib/db.mjs        one adapter: DATABASE_URL (pg) or embedded PGlite
-  supabase/migrations/      plain SQL schema
-  supabase/seed.sql         demo data
-  docs/                     the thesis and the migration guide
-```
+## Your first hour: ten things to ask for
 
-## Built for coding agents
+1. Put our association name, logo and colours on the statements.
+2. Test an import of our Member Jungle member export.
+3. Set our actual level fees and currencies.
+4. Show overdue renewals with unpaid invoices.
+5. Draft a renewal note for a named member.
+6. Show members who have not attended an event this year.
+7. Record our constitution's meeting notice period.
+8. Add our branch as a field through a new migration.
+9. Show missing officer consent and eligibility evidence.
+10. Add a read-only view for our committee's Monday meeting.
 
-The database, CLI and command recipes work with Claude Code, Codex, OpenCode or Cursor. Ask your coding agent for a new command and have it implement and test the change against the same records.
+## Documents, evidence and moving across
 
-## Contributing
+Change brand.json once. Documents render as draft branded HTML under docs-out/: member statements, renewal letters, event rolls, CPD evidence statements and committee notices. Read-only views render under views/. No web application or message delivery is included. Protect all rendered files as personal data.
 
-Issues and pull requests are welcome. Keep the shape: plain SQL, a small CLI, a slash command per recurring job, no front end.
+[Compliance checks](docs/compliance.md) cite NZ society guidance and distinguish constitutional policy from legal rules. AU obligations use explicitly recorded local deadlines, including ACNC extensions where applicable. A clean record check does not certify compliance.
 
-## Want it installed and run for you?
+[Moving from Member Jungle](docs/replace-memberjungle.md) covers the one-command member CSV import with explicit column mapping when report labels differ, explicit date order, repeat imports and preserved original columns. Event histories, CPD, invoices, gifts, family links and attachments require separate mapping. Importing a member is not evidence of join consent.
 
-Enterprise DNA installs Association for Claude Code for your business, migrates your MemberJungle data, connects it to the rest of your tools, and runs it for you as part of **Omni**, our managed Command Center. One setup fee, then a monthly retainer.
+[Why no front end](docs/why-no-front-end.md) explains self-service, mobile, offline, website and provider connections. Enterprise DNA builds those into a custom version. The base is an administrator's membership database. Member login, mobile access and provider connections are custom work.
 
-- Book a call: [enterprisedna.co/omni/book](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=memberjungle)
-- Read more: [enterprisedna.co/omni/instead-of/memberjungle](https://enterprisedna.co/omni/instead-of/memberjungle?utm_source=github&utm_medium=readme&utm_campaign=memberjungle)
+## Verification
 
-## License
+Tests use a temporary database and cover all commands, partial receipts, overpayments, duplicate references, capacity, waitlisting, consent, date validation, ambiguous names, import idempotence and rollback, drafts, exports and HTML. The suite validates shared SQL through PGlite and supports a disposable Postgres database through TEST_DATABASE_URL. CI runs Windows, Linux and Postgres. Installation-specific access and backup checks remain necessary.
 
-MIT. Copyright (c) 2026 Enterprise DNA.
+MIT licence. Not affiliated with Member Jungle or Anthropic. Hosting and agent usage have separate costs. [Book 30 minutes with Sam](https://enterprisedna.co/omni/book/?offer=replace-software&utm_campaign=memberjungle&utm_source=github&utm_medium=readme).
+
+## Provenance
+
+The membership domain builds on Enterprise DNA's MIT-licensed membership-for-claude-code project. This version adds Member Jungle export mapping, CPD review, approved-hour summaries and evidence statements. Shared scaffold components come from the Command Centre rebuild template.

@@ -1,22 +1,26 @@
 {
   "name": "association-for-claude-code",
   "version": "0.1.0",
-  "description": "The open-source association and member portal system that is just a database and Claude Code.",
+  "description": "The open-source membership and association management system that is just a database and Claude Code.",
   "type": "module",
   "license": "MIT",
   "author": "Enterprise DNA (https://www.enterprisedna.co)",
   "repository": "github:Enterprise-DNA-OS/association-for-claude-code",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "migrate": "node scripts/migrate.mjs",
     "seed": "node scripts/seed.mjs",
-    "demo": "node scripts/migrate.mjs && node scripts/seed.mjs",
+    "demo": "node scripts/migrate.mjs && node scripts/seed.mjs && node scripts/association.mjs attention && node scripts/association.mjs renewals-due && node scripts/association.mjs events",
     "view": "node scripts/view.mjs",
     "docs": "node scripts/docs.mjs",
-    "test": "node scripts/smoke.mjs"
+    "test": "node scripts/smoke.mjs",
+    "association": "node scripts/association.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.8",
-    "pg": "^8.23.0"
+    "pg": "^8.23.0",
+    "csv-parse": "^7.0.3"
   }
 }

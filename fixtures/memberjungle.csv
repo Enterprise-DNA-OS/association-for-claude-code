@@ -1,0 +1,4 @@
+Member Number,First Name,Last Name,Organisation,Email,Membership Level,Membership Status,Join Date,Expiry Date,Marketing Consent,Card Number,Notes
+000101,Hana,Roberts,Harbour Trust,hana@example.org,Professional,Active,2025-03-01,2027-03-01,Yes,0000100001018,"Board volunteer, north region"
+000102,Wiremu,Green,Coast Trust,wiremu@example.org,Associate,Pending,2024-02-20,2026-02-20,No,0000100001025,"Two lines
+in a note"

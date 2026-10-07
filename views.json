@@ -1,13 +1,51 @@
 [
   {
-    "name": "week",
-    "title": "This week",
-    "subtitle": "Association for Claude Code: what needs attention, rendered by npm run view",
+    "name": "membership-week",
+    "title": "Membership week",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Renewals in the next 60 days",
+        "sql": "select name,status,renewal_due,unpaid_invoices from member_health where status in ('active','lapsed') and renewal_due<=current_date+60 order by renewal_due"
+      },
+      {
+        "title": "Events",
+        "sql": "select name,starts_on,capacity,booked,waiting from event_summary order by starts_on"
+      },
+      {
+        "title": "Arrears",
+        "sql": "select member,currency,balance,due_on from invoice_balances where not void and balance>0 and due_on<current_date order by due_on"
+      }
+    ]
+  },
+  {
+    "name": "committee-review",
+    "title": "Committee review",
+    "sections": [
+      {
+        "title": "Officer evidence",
+        "sql": "select name,role,ends_on,consent_ref,eligibility_ref from officers order by ends_on"
+      },
+      {
+        "title": "Governance dates",
+        "sql": "select name,jurisdiction,due_on,source_url,completed_on from obligations order by due_on"
+      },
+      {
+        "title": "Learning gaps",
+        "sql": "select name,cpd_hours,cpd_target from member_health where status='active' and cpd_hours<cpd_target order by name"
+      }
+    ]
+  },
+  {
+    "name": "cpd-review",
+    "title": "CPD review desk",
+    "sections": [
+      {
+        "title": "Awaiting review",
+        "sql": "select * from cpd_review_queue"
+      },
+      {
+        "title": "Approved hours by category",
+        "sql": "select * from cpd_category_summary"
       }
     ]
   }

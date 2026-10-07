@@ -1,43 +1,17 @@
-# Association for Claude Code: operating instructions
+# Association for Claude Code
 
-This file is the brain. Claude Code reads it at the start of every session. It says who this is for, how work gets done, and the one right way to do each recurring job.
+Read docs/cli.md and the matching .claude/commands recipe. This installation is one association, not a multi-tenant service. Business: [association name]. Operator: [membership administrator]. Jurisdiction: [NZ or AU state]. Demo records are fictional.
 
-## Who this is for
+Read current records before answering or changing them. Monday review combines attention, renewals-due and events. Weekly rituals are renewal-risk, arrears, event rolls, cpd-gaps and committee obligations. Use the CLI for writes and keep partial IDs unambiguous.
 
-- **Business:** [YOUR BUSINESS]
-- **Operator:** [YOUR NAME], [your role]
-- **What matters most:** [the one or two outcomes you care about]
+Never fabricate a joining date, consent, payment, attendance or officer certificate. Financial commands record receipts already received; nothing charges a card. Renewal requires consent evidence and settled or voided invoices. No automatic messages or filings. Drafts belong in drafts/. Marketing invitations require recorded consent. Ask for explicit evidence before marking obligations complete.
 
-Fill this in once. A worker with context knows. A worker without it guesses.
+Read docs/compliance.md before changing a rule. Constitutional notice periods and CPD targets are local policy. Currencies stay separate. Do not infer legal membership termination from a lapsed subscription.
 
-## How to work
+Tailoring uses a new numbered SQL migration, updated commands and tests. Back up real data first, apply through npm run migrate and run npm test. Do not alter applied migrations. Only seed a demo database. Hosted Postgres needs restricted access and backups; local PGlite is single-process. Exported records and rendered HTML are private.
 
-1. **Take a brief, not a script.** The operator describes the outcome. You run the right command and present the answer.
-2. **Read before you write.** Before drafting anything about a record, read its full history first.
-3. **Plain language.** Short sentences. No filler. Numbers in tables.
-4. **Silent success, loud problems.** No play-by-play. Say what broke and what you did about it.
-5. **Stop at the line.** Anything that sends, deletes, or faces a customer waits for a yes in this session.
+Schema: supabase/migrations. CLI: scripts/association.mjs. Reads and mutations: scripts/lib/domain.mjs. Import: scripts/lib/import.mjs. Branding: brand.json. Snapshot definitions: views.json and documents.json. All runtimes follow this same file through AGENTS.md.
 
-## Routing table: one right way for each recurring job
+Omni by Enterprise DNA installs, customises and operates your version: https://enterprisedna.co/omni/book/?offer=replace-software&utm_campaign=memberjungle&utm_source=github
 
-| When the operator asks for... | Use this |
-|---|---|
-| <!-- TODO(author): one row per slash command --> | `/...` |
-
-If an ask fits nothing here, run the CLI directly (`npm run <cli> -- --help`) and then propose a new command for it.
-
-## Hard rules
-
-- Never send email or messages from here. Draft to `drafts/`, a person sends.
-- Never delete records without an explicit yes in this session. Prefer marking closed or archived.
-- Never invent a record. If a name is ambiguous, list the candidates and ask.
-- The database is the source of truth. If the answer is not in it, say so.
-
-## Where things live
-
-- `scripts/` the CLI. `scripts/lib/db.mjs` picks `DATABASE_URL` (Postgres, Supabase) or the embedded database in `.data/`.
-- `supabase/migrations/` the schema, plain SQL. `npm run migrate` applies it.
-- `.claude/commands/` the slash commands. Add one every time the same ask comes twice.
-- `docs/` the thesis and the guide for moving off MemberJungle.
-
-Built by Enterprise DNA. Installed and run for you as part of Omni: https://enterprisedna.co/omni/instead-of/memberjungle
+CPD records start pending. Use approve-cpd only after reading the evidence and naming the reviewer. Approved entries are locked. Only approved calendar-year hours count. Member Jungle CSV column labels vary; use an explicit mapping file when needed, never silently substitute identifiers.

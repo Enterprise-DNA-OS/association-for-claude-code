@@ -1,0 +1,77 @@
+{
+  "levels": [
+    "name",
+    "annual_fee",
+    "currency",
+    "cpd_hours"
+  ],
+  "members": [
+    "name",
+    "email",
+    "organisation",
+    "external_id",
+    "level_id",
+    "status",
+    "joined_on",
+    "renewal_due",
+    "consent_on",
+    "consent_ref",
+    "marketing_consent",
+    "last_contact_on",
+    "source_data"
+  ],
+  "events": [
+    "name",
+    "starts_on",
+    "capacity",
+    "fee",
+    "currency",
+    "status",
+    "venue"
+  ],
+  "invoices": [
+    "name",
+    "member_id",
+    "amount",
+    "currency",
+    "due_on",
+    "kind",
+    "void"
+  ],
+  "donations": [
+    "name",
+    "member_id",
+    "amount",
+    "currency",
+    "received_on",
+    "purpose",
+    "reference"
+  ],
+  "cpd": [
+    "name",
+    "member_id",
+    "completed_on",
+    "hours",
+    "evidence_ref",
+    "category"
+  ],
+  "officers": [
+    "name",
+    "member_id",
+    "role",
+    "appointed_on",
+    "ends_on",
+    "consent_ref",
+    "eligibility_ref"
+  ],
+  "obligations": [
+    "name",
+    "jurisdiction",
+    "due_on",
+    "source_url",
+    "evidence_ref",
+    "completed_on",
+    "notice_days",
+    "notice_sent_on"
+  ]
+}
