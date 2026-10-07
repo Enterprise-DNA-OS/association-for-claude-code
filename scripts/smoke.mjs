@@ -57,6 +57,9 @@ try{
  writeFileSync(bad,'Reference,Given,Family\n209,Other,Person\n');
  ok((await call('import',['memberjungle',bad],{mapping,dryRun:true}))[0].inserted===1);
  await fails('import',['memberjungle',bad],/required/);
+ writeFileSync(bad,'Reference,Given,Family,First Name\n000101,Hana,Roberts,Original source value\n');
+ await call('import',['memberjungle',bad],{mapping});
+ ok((await call('member',['Hana'])).member.source_data['First Name']==='Original source value');
  const backup=path.join(tmp,'backup.json');await call('export',[backup]);const saved=JSON.parse(readFileSync(backup));ok(saved.members.length===6&&saved.audit.length>5&&saved.payments.length===2);
  await fails('nonsense',[],/Unknown/);await db.close();db=null;
  // Exercise the real executable and both HTML renderers after releasing PGlite's handle.
