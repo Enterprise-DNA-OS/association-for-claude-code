@@ -44,6 +44,7 @@ export async function transaction(db,fn){await db.exec('BEGIN');try{const out=aw
 function date(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||'')||new Date(s+'T00:00:00Z').toISOString().slice(0,10)!==s)throw Error('Use a valid YYYY-MM-DD date');return s;}
 function amount(s){if(!/^\d+(\.\d{1,2})?$/.test(String(s))||Number(s)<=0)throw Error('Use a positive amount with at most two decimals');return s;}
 export async function run(db,cmd,args=[],opts={}){
+ if(cmd!=='import'&&(opts.dryRun||opts.mapping||opts.dateOrder))throw Error('Import options only apply to import; no changes made');
  if(cmd==='help')return commands.map(command=>({command}));
  if(reads[cmd])return db.query(reads[cmd]);
  if(cmd==='member'){const m=await resolve(db,'members',args[0]);return {member:m,health:await db.query('select * from member_health where id=$1',[m.id]),invoices:await db.query('select * from invoice_balances where member_id=$1',[m.id]),activity:await db.query('select * from activity where member_id=$1 order by happened_on desc',[m.id])};}

@@ -1,1 +1,1 @@
-Synthetic Member Jungle member/contact CSV using documented export headers. Contains no customer data. Dates use ISO format; multiline notes exercise quoted CSV parsing.
+Synthetic Member Jungle member CSV using the column aliases supported by this importer. The vendor documents CSV exports but does not publish a fixed export header specification. This is not a captured export. Compare your actual report headers and use an explicit mapping when needed. Contains no customer data. ISO dates, leading-zero member and card numbers, and multiline notes exercise CSV parsing.

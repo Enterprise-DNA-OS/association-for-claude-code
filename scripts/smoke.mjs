@@ -42,6 +42,10 @@ try{
  await db.exec("alter table members add constraint smoke_reject check(name<>'Reject Person')");writeFileSync(bad,'User ID,First name,Last name,Membership status\n201,Good,Person,Active\n202,Reject,Person,Active\n');await fails('import',['memberjungle',bad],/smoke_reject/);ok((await call('members')).length===6);
  await fails('approve-cpd',['Practice reading','Reviewer'],/evidence/);
  await fails('approve-cpd',['Ethics seminar',''],/Reviewer/);
+ await fails('approve-cpd',['Ethics seminar','Secretary'],/Import options/,{dryRun:true});
+ await call('set',['cpd','Ethics seminar',JSON.stringify({completed_on:'2099-01-01'})]);
+ await fails('approve-cpd',['Ethics seminar','Secretary'],/completed/);
+ await call('set',['cpd','Ethics seminar',JSON.stringify({completed_on:new Date().toISOString().slice(0,10)})]);
  await call('approve-cpd',['Ethics seminar','Secretary']);
  ok(Number((await call('cpd-categories')).find(x=>x.category==='Ethics').approved_hours)===3);
  await fails('approve-cpd',['Ethics seminar','Secretary'],/pending/);
